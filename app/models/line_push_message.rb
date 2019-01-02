@@ -1,5 +1,3 @@
-require 'line/bot'
-
 class LinePushMessage
   def initialize(user_id)
     @user_id = user_id
@@ -16,9 +14,6 @@ class LinePushMessage
   private
 
   def client
-    @client ||= Line::Bot::Client.new { |config|
-      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
-    }
+    @client ||= LineClientFactory.create
   end
 end

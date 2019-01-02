@@ -1,5 +1,3 @@
-require 'line/bot'
-
 class WebhookController < ApplicationController
   def receive
     unless verified_webhook_request?
@@ -14,10 +12,7 @@ class WebhookController < ApplicationController
   private
 
   def client
-    @client ||= Line::Bot::Client.new { |config|
-      config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
-      config.channel_token = ENV["LINE_CHANNEL_TOKEN"]
-    }
+    @client ||= LineClientFactory.create
   end
 
   def verified_webhook_request?
