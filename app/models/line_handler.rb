@@ -1,3 +1,5 @@
+require 'line/bot'
+
 class LineHandler
   def initialize(body)
     @body = body
